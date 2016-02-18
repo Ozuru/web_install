@@ -22,7 +22,7 @@ cur_dir=$(cd "$(dirname "$0")"; pwd)
 data_dir=/htdata/mysql
 src_dir=/usr/local/src
 bin_dir=/usr/local/mysql
-yum install git
+yum install git wget
 yum install -y gcc gcc-c++  make
 yum install –y openssl openssl-devel ncurses ncurses-devel cmake
  

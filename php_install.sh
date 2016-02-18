@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum -y install  kernel-devel ncurses-devel libxml2-devel openssl-devel curl-devel libjpeg-devel libpng-devel  pcre-devel libtool-libs freetype-devel gd zlib-devel file bison patch mlocate flex diffutils   readline-devel glibc-devel glib2-devel bzip2-devel gettext-devel libcap-devel libmcrypt-devel
-
+yum install wget autoconf unzip
 cur_dir=$(cd "$(dirname "$0")"; pwd)
 user=www
 group=www
@@ -27,7 +27,7 @@ if [ ! -f /usr/local/php/bin/phpize ]; then
 	if [ ! -f $src_dir/libmcrypt-2.5.8.tar.gz]; then 
 		cd /usr/local/src
 		echo "no php";
-		wget http://superb-dca2.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz
+		wget http://nchc.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz 
 	 
 	fi 
 	if [ ! -d $src_dir/libmcrypt-2.5.8 ]; then
@@ -114,6 +114,6 @@ source /etc/profile
 
 pecl install swoole
 
-cp $cur_dir/init.d/php-fpm /etc/init.d/
+cp $cur_dir/init_sh/php-fpm /etc/init.d/
 cp $cur_dir/sys_config/php.ini /usr/local/php/etc/
 cp $cur_dir/sys_config/php-fpm.conf /usr/local/php/etc/ 
