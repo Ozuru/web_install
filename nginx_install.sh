@@ -74,7 +74,7 @@ ln -s /usr/local/luajit/lib/libluajit-5.1.so /lib64/libluajit-5.1.so.2
 
 cd `dirname $0`
 
-cp $cur_dir/init.d/nginx /etc/init.d/
+cp $cur_dir/init_d/nginx /etc/init.d/
 
 echo "alias nginxlog='cd /usr/local/nginx/logs'" >> /root/.bashrc 
 source /root/.bashrc 
