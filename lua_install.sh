@@ -2,7 +2,7 @@
 
 yum install libtool
 src_dir=/usr/local/src
-
+cur_dir=$(cd "$(dirname "$0")"; pwd)
 #
 cd /usr/local/src
 
@@ -40,3 +40,5 @@ source /etc/profile
 luarocks install lua-cjson;
 luarocks install sockets
 luarocks install lua-geoip
+
+cp $cur_dir/lib_so/lua/* /usr/local/lib/lua/5.1/

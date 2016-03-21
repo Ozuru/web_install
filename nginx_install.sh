@@ -3,7 +3,9 @@
 src_dir=/usr/local/src
 cur_dir=$(cd "$(dirname "$0")"; pwd)
 yum install git wget
-yum -y install gcc gcc-c++  make automake autoconf  pcre pcre-devel
+yum -y install gcc gcc-c++  make automake autoconf 
+yum -y install  pcre pcre-devel
+yum -y install openssl openssl-devel
 
 # command -v git >/dev/null 2>&1 || { yum install  git}
 # command -v wget >/dev/null 2>&1 || { yum install  wget}
@@ -31,11 +33,20 @@ export LUAJIT_LIB=/usr/local/luajit/lib
 
 #
 cd $src_dir
-git clone    https://github.com/simpl/ngx_devel_kit 
-git clone    https://github.com/agentzh/echo-nginx-module  
-git clone    https://github.com/chaoslawful/lua-nginx-module 
-git clone    https://github.com/yaoweibin/nginx_tcp_proxy_module
 
+if [ ! -d $src_dir/ngx_devel_kit  ] ; then
+	git clone    https://github.com/simpl/ngx_devel_kit 
+fi 
+if [ ! -d $src_dir/echo-nginx-module    ] ; then
+	git clone    https://github.com/agentzh/echo-nginx-module 
+fi 
+ 
+if [ ! -d $src_dir/lua-nginx-module   ] ; then
+	git clone   https://github.com/chaoslawful/lua-nginx-module
+fi 
+ 
+#git clone    https://github.com/yaoweibin/nginx_tcp_proxy_module
+ 
 cd $src_dir
 
 
@@ -48,7 +59,7 @@ if [ ! -d $src_dir/nginx-1.9.9 ] ; then
 fi 
 
 cd $src_dir/nginx-1.9.9
-patch -p1 < /usr/local/src/nginx_tcp_proxy_module/tcp.patch
+#patch -p1 < /usr/local/src/nginx_tcp_proxy_module/tcp.patch
 
 
 ./configure --sbin-path=/usr/local/nginx/nginx \
@@ -78,3 +89,4 @@ cp $cur_dir/init_sh/nginx /etc/init.d/
 
 echo "alias nginxlog='cd /usr/local/nginx/logs'" >> /root/.bashrc 
 source /root/.bashrc 
+chkconfig nginx on;
