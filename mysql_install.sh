@@ -28,17 +28,17 @@ yum install –y openssl openssl-devel ncurses ncurses-devel cmake
  
 
 cd $src_dir 
-
-if [ ! -f $src_dir/mysql-5.5.41.tar.gz ] ; then 
-	wget https://downloads.mariadb.com/archives/mysql-5.5/mysql-5.5.41.tar.gz
+mysql_version="5.5.48"
+if [ ! -f $src_dir/mysql-$mysql_version.tar.gz ] ; then 
+	wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-$mysql_version.tar.gz 
 fi
 
-if [ ! -d $src_dir/mysql-5.5.41 ] ; then
-	tar	-zxvf mysql-5.5.41.tar.gz
+if [ ! -d $src_dir/mysql-$mysql_version ] ; then
+	tar	-zxvf mysql-{$mysql_version}.tar.gz
 fi
 
 if [ ! -e $bin_dir/bin/mysqld_safe ] ; then
-	cd $src_dir/mysql-5.5.41
+	cd $src_dir/mysql-{$mysql_version}
 	cmake . -DCMAKE_INSTALL_PREFIX=$bin_dir -DMYSQL_DATADIR=$data_dir
 	make && make install
 fi
@@ -58,7 +58,7 @@ cp $cur_dir/sys_config/my.cnf /etc/
 chown root.root /etc/rc.d/init.d/mysqld 
 
 
-cd /usr/local/mysql 
+cd $bin_dir 
 chown -R root .  
 scripts/mysql_install_db --user=mysql
 $bin_dir/bin/mysqld_safe --user=mysql
@@ -69,8 +69,9 @@ chkconfig --add mysqld
 chkconfig --level 3 mysqld on
 chkconfig --level 5 mysqld on 
 
-echo 'export PATH=$PATH:/usr/local/mysql/bin' >> /etc/profile
-source /etc/profile
-
-
+mysql_bin_cnt=`grep -c mysql /etc/profile`
+if [ $mysql_bin_cnt -gt 0 ] then
+	echo 'export PATH=$PATH:/usr/local/mysql/bin' >> /etc/profile
+	source /etc/profile
+fi
 mysql -u root -p -e "SET PASSWORD FOR 'root'@'localhost'=PASSWORD('123456');"

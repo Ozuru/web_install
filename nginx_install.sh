@@ -50,19 +50,19 @@ fi
 cd $src_dir
 
 
-if [ ! -e $src_dir/nginx-1.9.9.tar.gz ] ; then
-	wget http://nginx.org/download/nginx-1.9.9.tar.gz
+if [ ! -e $src_dir/nginx-1.9.13.tar.gz ] ; then
+	wget http://nginx.org/download/nginx-1.9.13.tar.gz
 fi
 
-if [ ! -d $src_dir/nginx-1.9.9 ] ; then
-	tar	-zxvf nginx-1.9.9.tar.gz
+if [ ! -d $src_dir/nginx-1.9.13 ] ; then
+	tar	-zxvf nginx-1.9.13.tar.gz
 fi 
 
-cd $src_dir/nginx-1.9.9
+cd $src_dir/nginx-1.9.13
 #patch -p1 < /usr/local/src/nginx_tcp_proxy_module/tcp.patch
 
 
-./configure --sbin-path=/usr/local/nginx/nginx \
+./configure --with-stream --sbin-path=/usr/local/nginx/nginx \
 --conf-path=/usr/local/nginx/nginx.conf \
 --pid-path=/usr/local/nginx/nginx.pid \
 --add-module=/usr/local/src/ngx_devel_kit \
