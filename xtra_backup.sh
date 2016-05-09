@@ -17,14 +17,14 @@ fi
 per_cnt=`yum list | grep percona | wc -l`
 
 
-if [ $per_cnt -eq 0 ] ;then
+if [ $per_cnt -eq 0 ] ; then
     echo " yum install percona error";
     exit;
 fi
 
-if [ ! $backup_dir ] ;then
+if [ ! $backup_dir ] ; then
 	echo "no backup dir"
-	exit
+	exit;
 fi
 
 yum install percona-xtrabackup
