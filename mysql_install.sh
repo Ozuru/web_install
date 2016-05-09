@@ -70,7 +70,7 @@ chkconfig --level 3 mysqld on
 chkconfig --level 5 mysqld on 
 
 mysql_bin_cnt=`grep -c mysql /etc/profile`
-if [ $mysql_bin_cnt -gt 0 ] then
+if [ $mysql_bin_cnt -gt 0 ] ; then
 	echo 'export PATH=$PATH:/usr/local/mysql/bin' >> /etc/profile
 	source /etc/profile
 fi
