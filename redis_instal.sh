@@ -7,18 +7,18 @@ work_dir=/usr/local/redis
 cur_dir=$(cd "$(dirname "$0")"; pwd)
 #
 cd /usr/local/src
-
-if [ ! -e $src_dir/redis-3.0.7.tar.gz  ]; then 
+red_version=3.2.0
+if [ ! -e $src_dir/redis-$red_version.tar.gz  ]; then 
 	cd /usr/local/src
-	wget http://download.redis.io/releases/redis-3.0.7.tar.gz
+	wget http://download.redis.io/releases/redis-$red_version.tar.gz
 fi 
 
 
-if [ ! -d $src_dir/redis-3.0.7 ] ; then
-		tar -zxvf redis-3.0.7.tar.gz
+if [ ! -d $src_dir/redis-$red_version ] ; then
+		tar -zxvf redis-$red_version.tar.gz
 fi 
 	
-cd  redis-3.0.7
+cd  redis-$red_version
 
 make && make install
 if [ ! -d $work_dir ] ; then
