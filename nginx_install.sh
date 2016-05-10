@@ -2,7 +2,7 @@
 
 src_dir=/usr/local/src
 cur_dir=$(cd "$(dirname "$0")"; pwd)
-yum install git wget
+yum -y install git wget
 yum -y install gcc gcc-c++  make automake autoconf 
 yum -y install  pcre pcre-devel
 yum -y install openssl openssl-devel
