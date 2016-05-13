@@ -25,10 +25,14 @@ if [ ! $backup_dir ] ; then
 	exit;
 fi
 
-yum install percona-xtrabackup
+yum install -y percona-xtrabackup
 
 innobackupex --user=root --password=$database_passwd $backup_dir
 
 sec_dir=`ls -tcl $backup_dir | grep '^d' | head -1 | awk '{print $NF}'`
+echo "#################################"
 
+echo "sec_dir = $sec_dir"
+
+echo "#################################"
 innobackupex --user=root --password=$database_passwd --apply-log $backup_dir/$sec_dir
