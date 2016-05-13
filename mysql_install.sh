@@ -22,7 +22,7 @@ cur_dir=$(cd "$(dirname "$0")"; pwd)
 data_dir=/htdata/mysql
 src_dir=/usr/local/src
 bin_dir=/usr/local/mysql
-yum install git wget
+yum install -y git wget
 yum install -y gcc gcc-c++  make
 yum install –y openssl openssl-devel ncurses ncurses-devel cmake
  
@@ -34,11 +34,11 @@ if [ ! -f $src_dir/mysql-$mysql_version.tar.gz ] ; then
 fi
 
 if [ ! -d $src_dir/mysql-$mysql_version ] ; then
-	tar	-zxvf mysql-{$mysql_version}.tar.gz
+	tar	-zxvf mysql-$mysql_version.tar.gz
 fi
 
 if [ ! -e $bin_dir/bin/mysqld_safe ] ; then
-	cd $src_dir/mysql-{$mysql_version}
+	cd $src_dir/mysql-$mysql_version
 	cmake . -DCMAKE_INSTALL_PREFIX=$bin_dir -DMYSQL_DATADIR=$data_dir
 	make && make install
 fi

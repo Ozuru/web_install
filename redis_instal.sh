@@ -1,7 +1,7 @@
 #!/bin/bash
 
-yum install libtool
-yum install gcc make gcc-c++ openssl openssl-devel
+yum install -y libtool
+yum install -y gcc make gcc-c++ openssl openssl-devel
 src_dir=/usr/local/src
 work_dir=/usr/local/redis
 cur_dir=$(cd "$(dirname "$0")"; pwd)

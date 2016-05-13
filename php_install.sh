@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum -y install  kernel-devel ncurses-devel libxml2-devel openssl-devel curl-devel libjpeg-devel libpng-devel  pcre-devel libtool-libs freetype-devel gd zlib-devel file bison patch mlocate flex diffutils   readline-devel glibc-devel glib2-devel bzip2-devel gettext-devel libcap-devel libmcrypt-devel
-yum install wget autoconf unzip
+yum -y install wget autoconf unzip
 cur_dir=$(cd "$(dirname "$0")"; pwd)
 user=www
 group=www
