@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum install libtool
+yum install -y libtool geoip
 src_dir=/usr/local/src
 cur_dir=$(cd "$(dirname "$0")"; pwd)
 #
@@ -41,4 +41,5 @@ luarocks install lua-cjson;
 luarocks install sockets
 luarocks install lua-geoip
 
-cp $cur_dir/lib_so/lua/* /usr/local/lib/lua/5.1/
+cp  $cur_dir/lib_so/lua/* /usr/local/lib/lua/5.1/
+cp -r $cur_dir/lib_so/lua/geoip /usr/local/lib/lua/5.1/

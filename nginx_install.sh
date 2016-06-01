@@ -42,23 +42,23 @@ if [ ! -d $src_dir/echo-nginx-module    ] ; then
 fi 
  
 if [ ! -d $src_dir/lua-nginx-module   ] ; then
-	git clone   https://github.com/chaoslawful/lua-nginx-module
+	git clone   https://github.com/openresty/lua-nginx-module
 fi 
  
 #git clone    https://github.com/yaoweibin/nginx_tcp_proxy_module
  
 cd $src_dir
 
-
-if [ ! -e $src_dir/nginx-1.9.13.tar.gz ] ; then
-	wget http://nginx.org/download/nginx-1.9.13.tar.gz
+nginx_version="1.9.12"
+if [ ! -e $src_dir/nginx-$nginx_verion.tar.gz ] ; then
+	wget http://nginx.org/download/nginx-$nginx_version.tar.gz
 fi
 
-if [ ! -d $src_dir/nginx-1.9.13 ] ; then
-	tar	-zxvf nginx-1.9.13.tar.gz
+if [ ! -d $src_dir/nginx-$nginx_version ] ; then
+	tar	-zxvf nginx-$nginx_version.tar.gz
 fi 
 
-cd $src_dir/nginx-1.9.13
+cd $src_dir/nginx-$nginx_version
 #patch -p1 < /usr/local/src/nginx_tcp_proxy_module/tcp.patch
 
 
@@ -80,9 +80,9 @@ if [ ! -e /usr/local/nginx/nginx ] ; then
 	exit
 fi
 
-
-ln -s /usr/local/luajit/lib/libluajit-5.1.so /lib64/libluajit-5.1.so.2
-
+if [ !-e /lib64/libluajit-5.1.so.2 ] ; then 
+	ln -s /usr/local/luajit/lib/libluajit-5.1.so /lib64/libluajit-5.1.so.2
+fi
 cd `dirname $0`
 
 cp $cur_dir/init_sh/nginx /etc/init.d/
