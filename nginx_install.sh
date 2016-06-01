@@ -80,7 +80,7 @@ if [ ! -e /usr/local/nginx/nginx ] ; then
 	exit
 fi
 
-if [ !-e /lib64/libluajit-5.1.so.2 ] ; then 
+if [ ! -e /lib64/libluajit-5.1.so.2 ] ; then 
 	ln -s /usr/local/luajit/lib/libluajit-5.1.so /lib64/libluajit-5.1.so.2
 fi
 cd `dirname $0`
