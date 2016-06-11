@@ -24,7 +24,7 @@ fi
 cd /usr/local/src
 src_dir=/usr/local/src
 if [ ! -f /usr/local/php/bin/phpize ]; then
-	if [ ! -f $src_dir/libmcrypt-2.5.8.tar.gz]; then 
+	if [ ! -f $src_dir/libmcrypt-2.5.8.tar.gz ]; then 
 		cd /usr/local/src
 		echo "no php";
 		wget http://nchc.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz 
@@ -38,22 +38,22 @@ if [ ! -f /usr/local/php/bin/phpize ]; then
 		make && make install
 	fi 
 
-	PHP_PATH=/usr/local/src/php-5.4.40
-	if [ ! -f $src_dir/php-5.4.40.tar.gz ]; then 
+	PHP_PATH=/usr/local/src/php-5.5.36
+	if [ ! -f $src_dir/php-5.5.36.tar.gz ]; then 
 		cd /usr/local/src
 		echo "no php";
-		wget http://cn2.php.net/distributions/php-5.4.40.tar.gz  
+		wget http://hk2.php.net/distributions/php-5.5.36.tar.gz
 	fi 
 
 
 	if [ ! -d $PHP_PATH ]; then
 		cd /usr/local/src
 		echo "no php"; 
-		tar -zxvf php-5.4.40.tar.gz 
+		tar -zxvf php-5.5.36.tar.gz 
 	fi 
 
 	cd $PHP_PATH
-	./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc  --with-mysql  --with-mysqli  --with-iconv-dir=/usr/local --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-zlib-dir --with-bz2 --with-zlib --with-gd --enable-gd-native-ttf --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl   --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --with-openssl --with-mhash --enable-sockets   --with-xmlrpc --enable-zip --enable-pcntl
+	./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc  --with-mysql --enable-tokenizer --enable-fileinfo --with-pdo --with-pdo-mysql  --with-mysqli  --with-iconv-dir=/usr/local --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-zlib-dir --with-bz2 --with-zlib --with-gd --enable-gd-native-ttf --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl   --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --with-openssl --with-mhash --enable-sockets   --with-xmlrpc --enable-zip --enable-pcntl
 
 	if [ ! -f $PHP_PATH/Makefile ]; then 
 		echo "no Makefile ; configure Error"; 
@@ -96,20 +96,22 @@ cd $MEM_PATH
 ./configure --enable-memcache --with-php-config=/usr/local/php/bin/php-config --with-zlib-dir
 make &&  make install
 
-APC_PATH=/usr/local/src/APC-3.1.13
-if [ ! -d $APC_PATH ]; then
-	cd /usr/local/src
-	echo "no memcache"; 
-	wget http://pecl.php.net/get/APC-3.1.13.tgz
-	tar -zxvf APC-3.1.13.tgz
-fi
+#APC_PATH=/usr/local/src/APC-3.1.13
+#if [ ! -d $APC_PATH ]; then
+#	cd /usr/local/src
+#	echo "no memcache"; 
+#	wget http://pecl.php.net/get/APC-3.1.13.tgz
+#	tar -zxvf APC-3.1.13.tgz
+#fi
  
-cd $APC_PATH
-/usr/local/php/bin/phpize
-./configure -enable-api -enable-apc-mmap -with-php-config=/usr/local/php/bin/php-config
-make &&  make install
-
-echo 'export PATH=$PATH:/usr/local/php/bin/' >> /etc/profile
+#cd $APC_PATH
+#/usr/local/php/bin/phpize
+#./configure -enable-api -enable-apc-mmap -with-php-config=/usr/local/php/bin/php-config
+#make &&  make install
+bin_cnt=`grep -c "/php/bin" /etc/profile`
+if [ $bin_cnt -eq 0 ]; then
+	echo 'export PATH=$PATH:/usr/local/php/bin/' >> /etc/profile
+fi
 source /etc/profile
 
 pecl install swoole
