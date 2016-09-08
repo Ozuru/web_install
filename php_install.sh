@@ -83,12 +83,12 @@ if [ ! -e $REDIS_PATH ]; then
 	cd /usr/local/src
 	echo "no phpredis"; 
 	wget https://github.com/nicolasff/phpredis/zipball/master -O phpredis.zip
-	unzip phpredis.zip
-	cd /usr/local/src/phpredis-phpredis-fc673f5/
+	unzip phpredis.zip -d ./phpredis
+	SUBDIR=`ls /usr/local/src/phpredis/`
+	cd /usr/local/src/phpredis/$SUBDIR
 	/usr/local/php/bin/phpize
 	./configure  --with-php-config=/usr/local/php/bin/php-config --with-zlib-dir
-	make &&  make install
-
+	make &&  make install 
 fi
 
 cd $MEM_PATH
