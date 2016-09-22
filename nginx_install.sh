@@ -49,7 +49,7 @@ fi
  
 cd $src_dir
 
-nginx_version="1.9.12"
+nginx_version="1.11.2"
 if [ ! -e $src_dir/nginx-$nginx_verion.tar.gz ] ; then
 	wget http://nginx.org/download/nginx-$nginx_version.tar.gz
 fi
