@@ -27,7 +27,7 @@ yum install -y gcc gcc-c++  make
 yum install –y openssl openssl-devel ncurses ncurses-devel cmake
   
 cd $src_dir 
-mysql_version="5.5.52"
+mysql_version="5.5.54"
 if [ ! -f $src_dir/mysql-$mysql_version.tar.gz ] ; then 
 	wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-$mysql_version.tar.gz 
 fi
