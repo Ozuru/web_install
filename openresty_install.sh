@@ -10,7 +10,7 @@ yum -y install openssl openssl-devel
 
 # command -v git >/dev/null 2>&1 || { yum install  git}
 # command -v wget >/dev/null 2>&1 || { yum install  wget}
-VERSION=1.11.2.1
+VERSION=1.11.2.2
 cd $src_dir
 
 if [ ! -f $src_dir/openresty-$VERSION.tar.gz ]; then 
@@ -24,7 +24,8 @@ cd openresty-$VERSION/
 --with-http_ssl_module \
 --with-http_stub_status_module \
 --with-http_sub_module \
---with-stream
+--with-stream \
+--without-luajit-lua52
 
 gmake
 sudo gmake install
